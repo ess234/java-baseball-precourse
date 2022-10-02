@@ -19,8 +19,6 @@ public class GameService {
         player = new Player(size);
 
         computer.setRandomNums();
-
-        System.out.println(computer);
     }
 
     public boolean startGame(){
