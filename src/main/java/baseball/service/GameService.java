@@ -2,19 +2,41 @@ package baseball.service;
 
 import baseball.dto.Computer;
 import baseball.dto.Player;
-import lombok.Builder;
 import lombok.Getter;
 
-@Builder
+import static camp.nextstep.edu.missionutils.Console.readLine;
+
 @Getter
-public class ScoreService {
+public class GameService {
     Computer computer;
     Player player;
 
     int ball = 0;
     int strike = 0;
 
-    public String getHint(){
+    public void readGame(int size) {
+        computer = new Computer(size);
+        player = new Player(size);
+
+        computer.setRandomNums();
+
+        System.out.println(computer);
+    }
+
+    public boolean startGame(){
+        System.out.println("숫자를 입력하세요 :  ");
+        player.inputNum(readLine());
+
+        String hint = getHint();
+        System.out.println("hint : "+hint);
+
+        return check3Strike();
+    }
+
+    private String getHint(){
+        ball = 0;
+        strike = 0;
+
         for (int i = 0; i < computer.getNums().size(); i++) {
             int checkNum = computer.getNums().get(i);
 
@@ -55,7 +77,7 @@ public class ScoreService {
         return result;
     }
 
-    public boolean check3Strike(){
+    private boolean check3Strike(){
         if (3 == strike){
             return true;
         }

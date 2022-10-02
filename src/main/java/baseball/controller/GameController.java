@@ -1,41 +1,21 @@
 package baseball.controller;
 
-import baseball.dto.Computer;
-import baseball.dto.Player;
-import baseball.service.ScoreService;
+import baseball.service.GameService;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class GameController {
     private static int NUMS_SIZE = 3;
 
-    Computer computer;
-    Player player;
-
-    private void readGame() {
-        computer = new Computer(NUMS_SIZE);
-        player = new Player(NUMS_SIZE);
-
-        computer.setRandomNums();
-
-        System.out.println(computer);
-    }
+    GameService gameService = new GameService();
 
     public void startGame() {
-        readGame();
-
         boolean isEnd = false;
 
+        gameService.readGame(NUMS_SIZE);
+
         while (!isEnd){
-            System.out.println("숫자를 입력하세요 :  ");
-            player.inputNum(readLine());
-
-            ScoreService scoreService = ScoreService.builder().computer(computer).player(player).build();
-
-            String hint = scoreService.getHint();
-            System.out.println("hint : "+hint);
-
-            isEnd = scoreService.check3Strike();
+            isEnd = gameService.startGame();
         }
 
         System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
