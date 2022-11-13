@@ -1,7 +1,10 @@
 package baseball;
 
+import lombok.ToString;
+
 import java.util.Objects;
 
+@ToString
 public class Ball {
     private int position;
     private int no;
