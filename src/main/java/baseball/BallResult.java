@@ -6,11 +6,11 @@ public class BallResult {
 
     public void report(BallStatus ballStatus) {
         if (BallStatus.STRIKE == ballStatus){
-            strike += 1;
+            this.strike += 1;
         }
 
         if (BallStatus.BALL == ballStatus){
-            ball += 1;
+            this.ball += 1;
         }
     }
 
@@ -20,5 +20,12 @@ public class BallResult {
 
     public int getBall() {
         return this.ball;
+    }
+
+    public String getHint(){
+        String ballHint = (this.getBall() > 0 ? this.getBall()+"볼 " : "");
+        String strikeHint = (this.getStrike() > 0 ? this.getStrike()+"스트라이크 " : "");
+
+        return ballHint + strikeHint;
     }
 }
