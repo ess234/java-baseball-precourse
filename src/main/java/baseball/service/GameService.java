@@ -1,5 +1,7 @@
-package baseball;
+package baseball.service;
 
+import baseball.domain.BallResult;
+import baseball.domain.Balls;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
@@ -15,17 +17,23 @@ public class GameService {
     Balls computer;
 
     public void readGame(int numsSize) {
+        computer = new Balls(this.setRandomNum(numsSize));
+    }
+
+    private List<Integer> setRandomNum(int numsSize) {
         List<Integer> randomNumList = new ArrayList<>();
+
         while (randomNumList.size() < numsSize) {
             int randomNum = Randoms.pickNumberInRange(MIN_RANDOMNUM, MAX_RANDOMNUM);
 
-            if (!randomNumList.contains(randomNum)) {
-                randomNumList.add(randomNum);
+            if (randomNumList.contains(randomNum)) {
+                continue;
             }
-        }
-        computer = new Balls(randomNumList);
 
-        System.out.println(computer.toString());
+            randomNumList.add(randomNum);
+        }
+
+        return randomNumList;
     }
 
     public boolean startGame() {

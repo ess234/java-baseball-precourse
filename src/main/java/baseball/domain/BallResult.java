@@ -1,4 +1,4 @@
-package baseball;
+package baseball.domain;
 
 public class BallResult {
     int strike = 0;
